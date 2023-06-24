@@ -18,7 +18,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
 
-def create_app(config=config_dict['dev']):
+def create_app(config=config_dict['pro']):
 
     app = Flask(__name__)
     CORS(app)

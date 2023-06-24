@@ -123,7 +123,7 @@ class URLClickApiView(Resource):
       return url , HTTPStatus.OK  
 
 
-@cache.cached(timeout=50)
+# @cache.cached(timeout=50)
 @url_namespace.route('/breakdown') 
 class GetURLSBreakDownApiView(Resource):
    
