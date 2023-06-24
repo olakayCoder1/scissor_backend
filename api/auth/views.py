@@ -37,22 +37,21 @@ class SignUpApiView(Resource):
    def post(self):
       data = request.get_json()  
       email = data.get('email')
-      password = data.get('password1')
-      password2 = data.get('password2')
-      if password != password2:
-         response = {'message' : 'Passwords do not match'} 
-         return response, HTTPStatus.BAD_REQUEST
+      password = data.get('password')
+      
+
       attempt_user = User.query.filter_by(email=email).first()
       if attempt_user :
          response = {'message' : 'Email already exist'} 
-         return response, HTTPStatus.BAD_REQUEST  
+         return response, HTTPStatus.BAD_REQUEST   
          
       new_user  = User(
          email=email,  password_hash= generate_password_hash(password)
-      )
+      ) 
       try:
          new_user.save()
-      except:
+      except Exception as e:
+         print(e)
          db.session.rollback()
          response = {'message' : 'An error occurred saving'} 
          return response, HTTPStatus.INTERNAL_SERVER_ERROR

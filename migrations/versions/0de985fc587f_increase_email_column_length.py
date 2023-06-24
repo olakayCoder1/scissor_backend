@@ -1,8 +1,8 @@
-"""initial migration
+"""Increase email column length
 
-Revision ID: 2c884e0b14cc
+Revision ID: 0de985fc587f
 Revises: 
-Create Date: 2023-05-14 02:30:11.572585
+Create Date: 2023-06-24 19:56:51.062759
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2c884e0b14cc'
+revision = '0de985fc587f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,9 +21,7 @@ def upgrade():
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('uuid', sa.String(length=60), nullable=False),
-    sa.Column('first_name', sa.String(length=100), nullable=False),
-    sa.Column('last_name', sa.String(length=100), nullable=False),
-    sa.Column('email', sa.String(length=100), nullable=False),
+    sa.Column('email', sa.String(length=64), nullable=False),
     sa.Column('password_hash', sa.String(length=64), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -45,11 +43,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('clicks', sa.Integer(), nullable=True),
     sa.Column('uuid', sa.String(length=60), nullable=False),
-    sa.Column('name', sa.String(length=100), nullable=True),
-    sa.Column('title', sa.String(length=100), nullable=True),
-    sa.Column('description', sa.String(length=1000), nullable=True),
-    sa.Column('long_url', sa.String(length=1000), nullable=False),
-    sa.Column('short_url', sa.String(length=100), nullable=False),
+    sa.Column('name', sa.String(length=60), nullable=True),
+    sa.Column('title', sa.String(length=60), nullable=True),
+    sa.Column('description', sa.String(length=60), nullable=True),
+    sa.Column('long_url', sa.String(length=60), nullable=False),
+    sa.Column('short_url', sa.String(length=60), nullable=False),
     sa.Column('url_code', sa.String(length=64), nullable=False),
     sa.Column('qr_code', sa.String(length=64), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
